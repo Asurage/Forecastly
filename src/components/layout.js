@@ -16,6 +16,18 @@ export function createLayout() {
 
         </section>
 
+        <section
+            id="weather-section"
+            class="mx-auto mt-10 flex max-w-6xl flex-col gap-6 lg:flex-row">
+
+        </section>
+
+        <section
+            id="forecast-section"
+            class="mx-auto mt-10 max-w-6xl">
+            
+        </section>
+
     </main>
   `;
 }
