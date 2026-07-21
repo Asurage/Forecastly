@@ -1,4 +1,4 @@
-export function createWeatherDetails() {
+export function createWeatherDetails(weather) {
   return `
     <div class="flex-1 rounded-3xl border border-gray-200 bg-white p-8 shadow-lg">
 
@@ -8,29 +8,29 @@ export function createWeatherDetails() {
 
       <div class="space-y-4">
 
-        <div class="flex justify-between">
+        <div class="flex justify-between text-gray-500">
           <span>Feels Like</span>
-          <span>31°C</span>
+          <span>${Math.round(weather.feelsLike)}°C</span>
         </div>
 
-        <div class="flex justify-between">
+        <div class="flex justify-between text-gray-500">
           <span>Humidity</span>
-          <span>70%</span>
+          <span>${weather.humidity}%</span>
         </div>
 
-        <div class="flex justify-between">
+        <div class="flex justify-between text-gray-500">
           <span>Wind</span>
-          <span>12 km/h</span>
+          <span>${weather.wind} km/h</span>
         </div>
 
-        <div class="flex justify-between">
+        <div class="flex justify-between text-gray-500">
           <span>Pressure</span>
-          <span>1012 hPa</span>
+          <span>${weather.pressure} hPa</span>
         </div>
 
-        <div class="flex justify-between">
+        <div class="flex justify-between text-gray-500">
           <span>Visibility</span>
-          <span>10 km</span>
+          <span>${weather.visibility} km</span>
         </div>
 
       </div>

@@ -7,7 +7,7 @@ export function createSearch() {
           id="city-input"
           type="text"
           placeholder="Search for a city..."
-          class="flex-1 rounded-xl border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-white/70 backdrop-blur-md outline-none transition focus:border-white/50"
+          class="flex-1 rounded-xl border border-gray-300 bg-white px-4 py-3 text-slate-800 placeholder-gray-400 backdrop-blur-md outline-none transition focus:border-gray-400"
         />
 
         <button

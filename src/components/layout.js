@@ -3,6 +3,16 @@ export function createLayout() {
     <main class="max-w-7xl mx-auto px-6">
 
         <section id="search-section"></section>
+        
+        <section
+            id="loading-section"
+            class="mx-auto mt-4 max-w-6xl">
+        </section>
+
+        <section
+            id="error-section"
+            class="mx-auto mt-4 max-w-6xl">
+        </section>
 
         <section
             id="weather-section"
