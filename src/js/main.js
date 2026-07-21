@@ -5,7 +5,7 @@ import { createLayout } from "../components/layout.js";
 import { createSearch } from "../components/search";
 import { createCurrentWeather } from "../components/currentWeather";
 import { createWeatherDetails } from "../components/weatherDetails";
-import { getWeather } from "./api.js";
+import { getWeather, getWeatherByCoordinates } from "./api.js";
 
 // Render application shell
 document.querySelector("#app").innerHTML = `
@@ -19,20 +19,9 @@ function renderSearch() {
 }
 
 //Render weather section
-async function renderWeather(city) {
-  try {
-    clearError();
-    showLoading();
-    const weather = await getWeather(city);
-
-    document.querySelector("#weather-section").innerHTML =
-      createCurrentWeather(weather) + createWeatherDetails(weather);
-  } catch (error) {
-    showError("City not found. Please check the spelling and try again.");
-    console.error(error);
-  } finally {
-    hideLoading();
-  }
+function renderWeather(weather) {
+  document.querySelector("#weather-section").innerHTML =
+    createCurrentWeather(weather) + createWeatherDetails(weather);
 }
 
 //Search City
@@ -42,10 +31,47 @@ async function searchCity(city) {
     return;
   }
 
-  await renderWeather(city);
-  cityInput.value = "";
+  try {
+    clearError();
+    showLoading();
+
+    const weather = await getWeather(city);
+    renderWeather(weather);
+
+    cityInput.value = "";
+  } catch (error) {
+    showError("City not found. Please check the spelling and try again.");
+    console.error(error);
+  } finally {
+    hideLoading();
+  }
 }
 
+//Current Location
+function getCurrentLocation() {
+  navigator.geolocation.getCurrentPosition(async (position) => {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+
+    try {
+      clearError();
+      showLoading();
+
+      const weather = await getWeatherByCoordinates(latitude, longitude);
+
+      renderWeather(weather);
+    } catch (error) {
+      showError("Failed to fetch weather data for your location.");
+      console.error(error);
+    } finally {
+      hideLoading();
+    }
+    (error) => {
+      showError("Location access was denied.");
+      console.error(error);
+    };
+  });
+}
 //helper functions
 
 //Loading state
@@ -90,13 +116,18 @@ function initializeApp() {
       cityInput.value = "";
     }
   });
+
+  locationButton.addEventListener("click", () => {
+    getCurrentLocation();
+  });
 }
 
 //Initialize app
 renderSearch();
 const searchButton = document.querySelector("#search-btn");
 const cityInput = document.querySelector("#city-input");
+const locationButton = document.querySelector("#location-btn");
 
 initializeApp();
 
-renderWeather("Vellore");
+searchCity("Vellore");
