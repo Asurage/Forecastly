@@ -6,6 +6,7 @@ import { createSearch } from "../components/search";
 import { createCurrentWeather } from "../components/currentWeather";
 import { createWeatherDetails } from "../components/weatherDetails";
 import { getWeather, getWeatherByCoordinates } from "./api.js";
+import { createForecast } from "../components/forecast.js";
 
 // Render application shell
 document.querySelector("#app").innerHTML = `
@@ -21,7 +22,9 @@ function renderSearch() {
 //Render weather section
 function renderWeather(weather) {
   document.querySelector("#weather-section").innerHTML =
-    createCurrentWeather(weather) + createWeatherDetails(weather);
+    createCurrentWeather(weather) +
+    createWeatherDetails(weather) +
+    createForecast(weather.forecast);
 }
 
 //Search City

@@ -2,7 +2,7 @@ const API_KEY = import.meta.env.VITE_WEATHER_API_KEY;
 
 // Get weather by city name
 export async function getWeather(city) {
-  const url = `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${city}&aqi=no`;
+  const url = `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${city}&days=3&aqi=no`;
 
   const response = await fetch(url);
 
@@ -11,7 +11,7 @@ export async function getWeather(city) {
   }
 
   const data = await response.json();
-
+  console.log(data);
   return {
     city: data.location.name,
     region: data.location.region,
@@ -29,12 +29,21 @@ export async function getWeather(city) {
     visibility: data.current.vis_km,
 
     isDay: data.current.is_day,
+    forecast: data.forecast.forecastday.slice(1).map((day) => ({
+      date: day.date,
+      maxTemp: day.day.maxtemp_c,
+      minTemp: day.day.mintemp_c,
+      condition: day.day.condition.text,
+      icon: `https:${day.day.condition.icon}`,
+      sunrise: day.astro.sunrise,
+      sunset: day.astro.sunset,
+    })),
   };
 }
 
 // Get weather by coordinates
 export async function getWeatherByCoordinates(latitude, longitude) {
-  const url = `https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${latitude},${longitude}&aqi=no`;
+  const url = `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${latitude},${longitude}&days=3&aqi=no`;
 
   const response = await fetch(url);
 
@@ -57,5 +66,14 @@ export async function getWeatherByCoordinates(latitude, longitude) {
     pressure: data.current.pressure_mb,
     visibility: data.current.vis_km,
     isDay: data.current.is_day,
+    forecast: data.forecast.forecastday.slice(1).map((day) => ({
+      date: day.date,
+      maxTemp: day.day.maxtemp_c,
+      minTemp: day.day.mintemp_c,
+      condition: day.day.condition.text,
+      icon: `https:${day.day.condition.icon}`,
+      sunrise: day.astro.sunrise,
+      sunset: day.astro.sunset,
+    })),
   };
 }
