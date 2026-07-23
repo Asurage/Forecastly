@@ -7,6 +7,7 @@ import { createCurrentWeather } from "../components/currentWeather";
 import { createWeatherDetails } from "../components/weatherDetails";
 import { getWeather, getWeatherByCoordinates } from "./api.js";
 import { createForecast } from "../components/forecast.js";
+import { updateBackground } from "./background.js";
 
 // Render application shell
 document.querySelector("#app").innerHTML = `
@@ -40,6 +41,7 @@ async function searchCity(city) {
 
     const weather = await getWeather(city);
     renderWeather(weather);
+    updateBackground(weather.condition, weather.isDay);
 
     cityInput.value = "";
   } catch (error) {
@@ -61,8 +63,10 @@ function getCurrentLocation() {
       showLoading();
 
       const weather = await getWeatherByCoordinates(latitude, longitude);
-
       renderWeather(weather);
+      updateBackground(weather.condition, weather.isDay);
+
+      cityInput.value = "";
     } catch (error) {
       showError("Failed to fetch weather data for your location.");
       console.error(error);

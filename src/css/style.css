@@ -1,5 +1,10 @@
 @import "tailwindcss";
 
+html,
+body {
+  min-height: 100vh;
+}
+
 .forecast-section {
   margin-top: 2rem;
 }
@@ -47,4 +52,28 @@
 
 .forecast-info p:last-child {
   color: #666;
+}
+
+.sunny {
+  background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+}
+
+.cloudy {
+  background: linear-gradient(135deg, #bdc3c7 0%, #2c3e50 100%);
+}
+
+.rainy {
+  background: linear-gradient(135deg, #4b79a1 0%, #283e51 100%);
+}
+
+.snowy {
+  background: linear-gradient(135deg, #e6dada 0%, #274046 100%);
+}
+
+.storm {
+  background: linear-gradient(135deg, #232526 0%, #414345 100%);
+}
+
+.night {
+  background: linear-gradient(135deg, #141e30 0%, #243b55 100%);
 }
