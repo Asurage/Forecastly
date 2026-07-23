@@ -1,1 +1,50 @@
 @import "tailwindcss";
+
+.forecast-section {
+  margin-top: 2rem;
+}
+
+.forecast-section h2 {
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.forecast-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.forecast-item {
+  flex: 1;
+  min-width: 220px;
+
+  padding: 1rem;
+
+  border-radius: 20px;
+
+  background: white;
+
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.forecast-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.forecast-content img {
+  width: 70px;
+  height: 70px;
+}
+
+.forecast-info p:first-child {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.forecast-info p:last-child {
+  color: #666;
+}
